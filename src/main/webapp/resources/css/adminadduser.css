@@ -1,0 +1,20 @@
+@CHARSET "UTF-8";
+.adminaddemployee{
+	border:1px #cccccc solid;
+	width:100%;
+}
+.adminaddemployee1{
+	margin:0 0 0 25%;
+}
+.adminaddemployee2{
+	color:#295D89;
+	font-size:25px;
+}
+#adminaddemployee3{
+	color:red;
+}
+.adminaddemployee4{
+	font-size:20px;
+	font-family:Arial;
+	font-weight:normal;
+}

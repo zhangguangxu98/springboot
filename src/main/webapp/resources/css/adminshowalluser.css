@@ -1,0 +1,23 @@
+@CHARSET "ISO-8859-1";
+.adminshowallproject{
+	border:1px #cccccc solid;
+	width:100%;
+}
+.adminshowallproject1{
+	margin:5 0 0 0;
+/* 	overflow-y:scroll;
+	overflow-x:scroll; */
+	width:100%;
+	height:350px;
+}
+#adminshowallproject2{
+	border-collapse:collapse;
+	width:100%;
+}
+#adminshowallproject2 td{
+	border:1px solid #cccccc;
+}
+.adminshowallproject3{
+	background-color:#295D89;
+	color:white;
+}

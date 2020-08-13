@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springboot.dao.LogDao">
+    <!-- 显示信息 -->
+    <select id="showAllLog" parameterType="java.lang.String" resultType="com.springboot.entity.Log">
+        SELECT * FROM mylog
+        WHERE 1=1
+        <if test='sdate != "0" and edate!="0"'>
+            and date <![CDATA[ >= ]]> #{sdate} and date <![CDATA[ <= ]]> #{edate}
+        </if>
+        <if test='sdate != "0" and edate=="0"'>
+            and date <![CDATA[ >= ]]> #{sdate}
+        </if>
+        <if test='sdate=="0" and edate!="0"'>
+            and date <![CDATA[ <= ]]> #{edate}
+        </if>
+        order by id DESC
+    </select>
+
+    <!-- 更新信息 -->
+    <select id="beforeUpdateLog" resultType="com.springboot.entity.Log">
+        SELECT *
+        FROM mylog
+        WHERE
+        id=#{id}
+    </select>
+    <update id="updateLog"  parameterType="com.springboot.entity.Log">
+         update mylog SET date=#{date}, home=#{home},clothes=#{clothes}, meal=#{meal},room=#{room},
+         trip=#{trip},lifeuse=#{lifeuse},play=#{play},insurance=#{insurance},pretaxincome=#{pretaxincome},
+         idroutine=#{idroutine},dateroutine=#{dateroutine},homeroutine=#{homeroutine},clothesroutine=#{clothesroutine},
+         mealroutine=#{mealroutine},roomroutine=#{roomroutine},triproutine=#{triproutine},
+         useroutine=#{useroutine},playroutine=#{playroutine},insuranceroutine=#{insuranceroutine},
+         selfcontrol=#{selfcontrol},diligence=#{diligence},goodorder=#{goodorder},clean=#{clean},
+         frugality=#{frugality},honest=#{honest},integrity=#{integrity},modest=#{modest},friendly=#{friendly},
+         tolerant=#{tolerant},diary=#{diary}
+         where id=#{id}
+    </update>
+
+    <!-- 添加信息 -->
+    <insert id="addLog" parameterType="com.springboot.entity.Log">
+        insert into mylog (id,date,home,clothes,meal,room,trip,lifeuse,play,insurance,pretaxincome,
+				idroutine,dateroutine,homeroutine,clothesroutine,mealroutine,roomroutine,triproutine,
+				useroutine,playroutine,insuranceroutine,selfcontrol,diligence,goodorder,clean,
+				frugality,honest,integrity,modest,friendly,tolerant,diary)
+				values (#{id}, #{date}, #{home},#{clothes}, #{meal},#{room},#{trip},#{lifeuse},#{play},
+				#{insurance},#{pretaxincome},#{idroutine},#{dateroutine},#{homeroutine},#{clothesroutine},
+                #{mealroutine},#{roomroutine},#{triproutine},#{useroutine},#{playroutine},#{insuranceroutine},
+                #{selfcontrol},#{diligence},#{goodorder},#{clean},#{frugality},#{honest},
+                #{integrity},#{modest},#{friendly},#{tolerant},#{diary})
+    </insert>
+
+    <!-- 删除信息 -->
+    <delete id="deleteLog" parameterType="java.lang.String">
+        DELETE FROM mylog WHERE id = #{id}
+    </delete>
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springboot.dao.PlanDao">
+    <!-- 显示信息 -->
+    <select id="showAllPlan" parameterType="java.lang.String" resultType="com.springboot.entity.Plan">
+        SELECT * FROM myplan
+        WHERE 1=1
+        <if test='sdate != "0" and edate!="0"'>
+            and startdate <![CDATA[ >= ]]> #{sdate} and enddate <![CDATA[ <= ]]> #{edate}
+        </if>
+        <if test='sdate != "0" and edate=="0"'>
+            and startdate <![CDATA[ >= ]]> #{sdate}
+        </if>
+        <if test='sdate=="0" and edate!="0"'>
+            and enddate <![CDATA[ <= ]]> #{edate}
+        </if>
+        order by id ASC
+    </select>
+
+    <!-- 更新信息 -->
+    <select id="beforeUpdatePlan" resultType="com.springboot.entity.Plan">
+        SELECT *
+        FROM myplan
+        WHERE
+        id=#{id}
+    </select>
+    <update id="updatePlan"  parameterType="com.springboot.entity.Plan">
+         update myplan SET startdate=#{startdate},enddate=#{enddate},plan=#{plan},content=#{content},
+         assessment=#{assessment} WHERE id=#{id}
+    </update>
+
+    <!-- 添加信息 -->
+    <insert id="addPlan" parameterType="com.springboot.entity.Plan">
+        INSERT INTO myplan (id, startdate, enddate, plan, content, assessment)
+        VALUES (#{id},#{startdate},#{enddate},#{plan},#{content},#{assessment})
+    </insert>
+
+    <!-- 删除信息 -->
+    <delete id="deletePlan" parameterType="java.lang.String">
+        DELETE FROM myplan WHERE id = #{id}
+    </delete>
+</mapper>

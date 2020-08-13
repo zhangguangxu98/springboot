@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springboot.dao.LotteryDao">
+
+    <!-- 显示信息 -->
+    <select id="showAllLottery" parameterType="java.lang.String" resultType="com.springboot.entity.Lottery">
+        SELECT * FROM lotteryresult
+        WHERE 1=1
+        <if test='sdate != "0" and edate!="0"'>
+            and date <![CDATA[ >= ]]> #{sdate} and date <![CDATA[ <= ]]> #{edate}
+        </if>
+        <if test='sdate != "0" and edate=="0"'>
+            and date <![CDATA[ >= ]]> #{sdate}
+        </if>
+        <if test='sdate=="0" and edate!="0"'>
+            and date <![CDATA[ <= ]]> #{edate}
+        </if>
+        order by phase DESC
+    </select>
+
+    <!-- 更新信息 -->
+    <select id="beforeUpdateLotteryResult" resultType="com.springboot.entity.Lottery">
+        SELECT *
+        FROM lotteryresult
+        WHERE
+        phase=#{phase}
+    </select>
+    <update id="updateLotteryResult"  parameterType="com.springboot.entity.Lottery">
+         update lotteryresult SET date=#{date}, red1=#{red1},red2=#{red2}, red3=#{red3},red4=#{red4},
+         red5=#{red5},blue1=#{blue1},blue2=#{blue2}
+         where phase=#{phase}
+    </update>
+
+    <!-- 添加信息 -->
+    <insert id="addLotteryResult" parameterType="com.springboot.entity.Lottery">
+        insert into lotteryresult(phase,date,red1,red2,red3,red4,red5,blue1,blue2)
+        values(#{phase},#{date},#{red1},#{red2},#{red3},#{red4},#{red5},#{blue1},#{blue2})
+    </insert>
+
+    <!-- 删除信息 -->
+    <delete id="deleteLotteryResult" parameterType="java.lang.String">
+        DELETE FROM lotteryresult WHERE phase = #{phase}
+    </delete>
+
+</mapper>

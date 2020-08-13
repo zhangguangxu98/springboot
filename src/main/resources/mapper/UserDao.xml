@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springboot.dao.UserDao">
+    <select id="userLogin" resultType="com.springboot.entity.User">
+        SELECT name,password,
+        email,mark,phone
+        FROM user
+        WHERE
+        name=#{name} AND password=#{password}
+    </select>
+
+    <!-- 显示信息 -->
+    <select id="showAllUser" parameterType="java.lang.String" resultType="com.springboot.entity.User">
+        SELECT * FROM user
+        WHERE 1=1
+        <if test='name != "0"'>
+            and name=#{name}
+        </if>
+        order by name DESC
+    </select>
+
+    <!-- 更新信息 -->
+    <select id="beforeUpdateUser" resultType="com.springboot.entity.User">
+        SELECT name,password,
+        email,mark,phone
+        FROM user
+        WHERE
+        name=#{name}
+    </select>
+    <update id="updateUser"  parameterType="com.springboot.entity.User">
+        UPDATE User
+        <set>
+            password=#{password},
+            email=#{email},
+            mark=#{mark},
+            phone=#{phone}
+        </set>
+        WHERE name=#{name}
+    </update>
+
+    <!-- 添加信息 -->
+    <insert id="addUser" parameterType="com.springboot.entity.User">
+        INSERT INTO
+        user(name,password,
+        email,mark,phone)
+        VALUES
+        (#{name},#{password},#{email},#{mark},#{phone})
+    </insert>
+
+    <!-- 删除信息 -->
+    <delete id="deleteUser" parameterType="java.lang.String">
+        DELETE FROM user WHERE name = #{name}
+    </delete>
+</mapper>
