@@ -1,8 +1,7 @@
 package com.springboot.service.impl;
 
-import com.springboot.entity.Log;
 import com.springboot.dao.LogDao;
-import com.springboot.entity.Lottery;
+import com.springboot.entity.Log;
 import com.springboot.page.Pager;
 import com.springboot.service.LogService;
 import com.springboot.util.StringUtil;
@@ -12,7 +11,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -44,6 +42,11 @@ public class LogServiceImpl implements LogService {
         logDao.updateLog(log);
     }
 
+    //添加信息之前
+    public Log beforeAddLog(){
+        Log log=logDao.beforeAddLog();
+        return log;
+    }
     //添加信息
     public void addLog(Log log){
         logDao.addLog(log);

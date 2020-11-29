@@ -1,7 +1,6 @@
 package com.springboot.service;
 
 import com.springboot.entity.Log;
-import com.springboot.entity.Lottery;
 import com.springboot.page.Pager;
 
 import java.util.ArrayList;
@@ -16,6 +15,8 @@ public interface LogService {
     public ArrayList<Log> beforeUpdateLog(String paras);
     public void updateLog(Log log);
 
+    //添加信息之前
+    public Log beforeAddLog();
     //添加信息
     public void addLog(Log log);
 

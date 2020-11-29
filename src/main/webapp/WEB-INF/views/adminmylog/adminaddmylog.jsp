@@ -1,8 +1,10 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.springboot.entity.Log" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+Log log= (Log) request.getAttribute("adminbeforeaddmylog");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -58,13 +60,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                               	序号:
                                           </td>
                                           <td>
-                                           <input type="text" style="width: 50px; height: 30px;" name="id" id="id" value=''>
+                                           <input type="text" style="width: 50px; height: 30px;" name="id" id="id" value='<%=log.getId()%>'>
                                        	  </td>
                                           <td>
                                               	日期:
                                           </td>
                                           <td>
-                                           <input type="text" style="width: 50px; height: 30px;" name="date" id="date" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate">
+<%--                                           <input type="text" style="width: 50px; height: 30px;" name="date" id="date" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate">--%>
+                                                <input type="text" style="width: 50px; height: 30px;" name="date" id="date"  value='<%=log.getDate()%>'>
+
                                           </td>
                                           <td>
                                               	家庭:

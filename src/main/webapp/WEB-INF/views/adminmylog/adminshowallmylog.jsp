@@ -58,7 +58,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							                              <img src="images/add.png" alt="add" height="30px" width="30px"/>
 							                         </td> -->
 													 <td>
-													       <input type="button" value="添加日志" style="height:30px;" onclick="javascript:window.location.href='/springboot/adminaddlog'"/>
+<%--													       <input type="button" value="添加日志" style="height:30px;" onclick="javascript:window.location.href='/springboot/adminaddmylog'"/>--%>
+														 <input type="button" value="添加日志" style="height:30px;" onclick="beforeAdd()"/>
 													 </td>
 												   <td>
 														 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

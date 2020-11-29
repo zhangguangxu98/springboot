@@ -38,6 +38,10 @@
          where id=#{id}
     </update>
 
+    <!-- 添加信息之前 -->
+    <select id="beforeAddLog" resultType="com.springboot.entity.Log">
+        select * from mylog  order by id desc limit 1
+    </select>
     <!-- 添加信息 -->
     <insert id="addLog" parameterType="com.springboot.entity.Log">
         insert into mylog (id,date,home,clothes,meal,room,trip,lifeuse,play,insurance,pretaxincome,

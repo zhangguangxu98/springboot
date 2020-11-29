@@ -2,7 +2,6 @@ package com.springboot.controller;
 
 import com.google.gson.Gson;
 import com.springboot.entity.Log;
-import com.springboot.entity.Lottery;
 import com.springboot.page.Pager;
 import com.springboot.service.LogService;
 import com.springboot.util.ExportUtil;
@@ -20,7 +19,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,8 +28,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.text.DateFormat;
+import java.text.Format;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 public class LogController {
@@ -164,6 +166,26 @@ public class LogController {
         return new ModelAndView("redirect:/adminbeforeupdatemylog?id="+id);
     }
 
+    //添加信息之前
+    @RequestMapping(value="/adminbeforeaddmylog", method={RequestMethod.GET})
+    public ModelAndView adminBeforeAddLog(HttpServletRequest request,HttpServletResponse response) throws ParseException {
+        Log log=logService.beforeAddLog();
+        Log adminbeforeaddmylog=new Log();
+        adminbeforeaddmylog.setId(Integer.valueOf(log.getId())+1);
+        String endDate=log.getDate();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date sDate = sdf.parse(endDate);
+        Format f = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+        c.setTime(sDate);
+        c.add(Calendar.DAY_OF_MONTH, 1);    //利用Calendar 实现 Date日期+1天
+        sDate = c.getTime();
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+        endDate = sdf1.format(sDate);
+        System.out.println("Date类型转String类型  "+endDate);//将日期转成String类型 方便进入数据库比较
+        adminbeforeaddmylog.setDate(endDate);
+        return new ModelAndView("/adminmylog/adminaddmylog","adminbeforeaddmylog",adminbeforeaddmylog);
+    }
     //添加信息
     @RequestMapping(value="/adminaddmylog", method={RequestMethod.POST,RequestMethod.GET})
     public ModelAndView adminAddLog(HttpServletRequest request,HttpServletResponse response){

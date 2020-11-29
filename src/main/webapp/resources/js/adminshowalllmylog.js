@@ -94,13 +94,16 @@ function selectAllCheckBox(){
 		}
 }
 
-function submitDelForm(){  
+function submitDelForm(){
 	if(!confirm("确认要删除？")){
 		window.event.returnValue=false;
 	}else{
-	    var formElement = document.getElementById("delform");
-	    formElement.submit(); 
+		var formElement = document.getElementById("delform");
+		formElement.submit();
 	}
-} 
-	
+}
+
+function beforeAdd(){
+		window.location.href="/springboot/adminbeforeaddmylog";
+}
 	

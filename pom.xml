@@ -48,6 +48,12 @@
             <artifactId>c3p0</artifactId>
             <version>0.9.5.2</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.mchange/mchange-commons-java -->
+        <dependency>
+            <groupId>com.mchange</groupId>
+            <artifactId>mchange-commons-java</artifactId>
+            <version>0.2.11</version>
+        </dependency>
         <!--引入gson-->
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -59,14 +65,12 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <scope>provided</scope>
         </dependency>
         <!-- 打war包servlet 依赖 -->
         <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-servlet-api</artifactId>
             <version>8.0.36</version>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -83,7 +87,6 @@
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-jasper</artifactId>
-            <scope>provided</scope>
         </dependency>
 
         <!-- POI -->
